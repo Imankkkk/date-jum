@@ -81,6 +81,13 @@
             margin-top: 20px;
         }
 
+        .previous-dates {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: left;
+            color: #333;
+        }
+
         .button {
             margin-top: 20px;
             background-color: #ff6b81;
@@ -121,9 +128,8 @@
 
         <button class="button" onclick="showDatePlace()">Ayo!</button>
 
-        <div class="date-place" id="datePlace">
-            <!-- Tanggal dan tempat akan muncul di sini -->
-        </div>
+        <div class="date-place" id="datePlace"></div>
+        <div class="previous-dates" id="previousDates"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -166,6 +172,14 @@
             "retina_detect": true
         });
 
+        // Fungsi untuk memuat data dari Local Storage
+        function loadPreviousDates() {
+            const dates = JSON.parse(localStorage.getItem('dates')) || [];
+            dates.forEach(item => {
+                addDateToList(item.date, item.time, item.place);
+            });
+        }
+
         function showDatePlace() {
             const date = document.getElementById("date").value;
             const time = document.getElementById("time").value;
@@ -173,12 +187,32 @@
 
             if (date && time && place) {
                 const datePlace = document.getElementById("datePlace");
-                datePlace.style.display = "block";  // Menampilkan tanggal dan tempat
                 datePlace.innerHTML = `📅 ${date}, Jam ${time}<br>📍 Tempat: ${place}`;
+
+                // Simpan ke Local Storage
+                const dates = JSON.parse(localStorage.getItem('dates')) || [];
+                dates.push({ date, time, place });
+                localStorage.setItem('dates', JSON.stringify(dates));
+
+                // Tambahkan tanggal ke daftar
+                addDateToList(date, time, place);
+
+                // Kosongkan input setelah ditampilkan
+                document.getElementById("date").value = '';
+                document.getElementById("time").value = '';
+                document.getElementById("place").value = '';
             } else {
                 alert("Tolong isi semua kolom dulu ya!");
             }
         }
+
+        function addDateToList(date, time, place) {
+            const previousDates = document.getElementById("previousDates");
+            previousDates.innerHTML += `📅 ${date}, Jam ${time}<br>📍 Tempat: ${place}<br>`;
+        }
+
+        // Muat data saat halaman dimuat
+        loadPreviousDates();
     </script>
 </body>
 </html>
