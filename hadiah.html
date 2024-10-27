@@ -39,6 +39,12 @@
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .description {
+            margin-top: 10px;
+            font-size: 20px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -46,12 +52,15 @@
     <div class="container">
         <div class="gift" onclick="showImage()">🎁</div>
         <img id="surpriseImage" class="hidden" src="gambar_hadiah.jpg" alt="Hadiah Kejutan!" class="image">
+        <div id="description" class="hidden description">hadiahnye tak sampai lagi, esok hadiahnye sampai orang bagi kamu hshshshs</div>
     </div>
 
     <script>
         function showImage() {
             const image = document.getElementById("surpriseImage");
+            const description = document.getElementById("description");
             image.classList.remove("hidden");  // Tampilkan gambar
+            description.classList.remove("hidden");  // Tampilkan teks deskripsi
         }
     </script>
 </body>
