@@ -54,40 +54,6 @@
             margin: 20px 0;
         }
 
-        .message {
-            font-size: 22px;
-            font-weight: 600;
-            color: #555;
-        }
-
-        .input-container {
-            margin: 20px 0;
-            text-align: left;
-        }
-
-        input[type="date"], input[type="text"], input[type="time"] {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-        }
-
-        .date-place {
-            font-size: 20px;
-            font-weight: 500;
-            color: #333;
-            margin-top: 20px;
-        }
-
-        .previous-dates {
-            margin-top: 20px;
-            font-size: 18px;
-            text-align: left;
-            color: #333;
-        }
-
         .button {
             margin-top: 20px;
             background-color: #ff6b81;
@@ -113,23 +79,7 @@
         <h1>Hei, Sayang!</h1>
         <p>Ada yang spesial yang pengen aku ajakin kamu...</p>
         <div class="heart">💖</div>
-        <div class="message">
-            Kamu mau ngedate sama aku? Isi tempat dan tanggalnya ya!
-        </div>
-
-        <div class="input-container">
-            <label for="date">Tanggal:</label>
-            <input type="date" id="date" required>
-            <label for="time">Waktu:</label>
-            <input type="time" id="time" required>
-            <label for="place">Tempat:</label>
-            <input type="text" id="place" placeholder="Masukkan tempat ngedate..." required>
-        </div>
-
-        <button class="button" onclick="showDatePlace()">Ayo!</button>
-
-        <div class="date-place" id="datePlace"></div>
-        <div class="previous-dates" id="previousDates"></div>
+        <button class="button" onclick="openGiftPage()">Ayo!</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -172,47 +122,10 @@
             "retina_detect": true
         });
 
-        // Fungsi untuk memuat data dari Local Storage
-        function loadPreviousDates() {
-            const dates = JSON.parse(localStorage.getItem('dates')) || [];
-            dates.forEach(item => {
-                addDateToList(item.date, item.time, item.place);
-            });
+        function openGiftPage() {
+            // Buka tab baru yang menuju ke hadiah.html
+            window.open("hadiah.html", "_blank");
         }
-
-        function showDatePlace() {
-            const date = document.getElementById("date").value;
-            const time = document.getElementById("time").value;
-            const place = document.getElementById("place").value;
-
-            if (date && time && place) {
-                const datePlace = document.getElementById("datePlace");
-                datePlace.innerHTML = `📅 ${date}, Jam ${time}<br>📍 Tempat: ${place}`;
-
-                // Simpan ke Local Storage
-                const dates = JSON.parse(localStorage.getItem('dates')) || [];
-                dates.push({ date, time, place });
-                localStorage.setItem('dates', JSON.stringify(dates));
-
-                // Tambahkan tanggal ke daftar
-                addDateToList(date, time, place);
-
-                // Kosongkan input setelah ditampilkan
-                document.getElementById("date").value = '';
-                document.getElementById("time").value = '';
-                document.getElementById("place").value = '';
-            } else {
-                alert("Tolong isi semua kolom dulu ya!");
-            }
-        }
-
-        function addDateToList(date, time, place) {
-            const previousDates = document.getElementById("previousDates");
-            previousDates.innerHTML += `📅 ${date}, Jam ${time}<br>📍 Tempat: ${place}<br>`;
-        }
-
-        // Muat data saat halaman dimuat
-        loadPreviousDates();
     </script>
 </body>
 </html>
