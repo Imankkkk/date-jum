@@ -19,6 +19,12 @@
             text-align: center;
         }
 
+        .instruction {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
         .gift {
             font-size: 100px;
             cursor: pointer;
@@ -45,22 +51,48 @@
             font-size: 20px;
             color: #555;
         }
+
+        .birthday-button {
+            display: none;
+            margin-top: 20px;
+            background-color: #ff6b81;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .birthday-button:hover {
+            background-color: #ff4757;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <div class="instruction">Tekan hadiah tu dulu pastu tekan ni:</div>
         <div class="gift" onclick="showImage()">🎁</div>
-        <img id="surpriseImage" class="hidden" src="gambar_hadiah.jpg" alt="Hadiah Kejutan!" class="image">
-        <div id="description" class="hidden description">Tadaaa! tapi hadiahnye tak sampai lagi, esok hadiahnye sampai orang bagi kamu hshshshs tapi kalau nak bagi hadiah tu kita kene meet so kita nak meet kat mana? nanti kamu gitau orang tauu</div>
+        <img id="surpriseImage" class="hidden image" src="gambar_hadiah.jpg" alt="Hadiah Kejutan!">
+        <div id="description" class="hidden description">orang ade hadiah untuk kamuu hshshshs</div>
+        <button id="birthdayButton" class="birthday-button" onclick="openBirthdayPage()">Tadaaa! tapi hadiahnye tak sampai lagi, esok hadiahnye sampai orang bagi kamu hshshshs tapi kalau nak bagi hadiah tu kita kene meet so kita nak meet kat mana? nanti kamu gitau orang tauu</button>
     </div>
 
     <script>
         function showImage() {
             const image = document.getElementById("surpriseImage");
             const description = document.getElementById("description");
+            const birthdayButton = document.getElementById("birthdayButton");
             image.classList.remove("hidden");  // Tampilkan gambar
             description.classList.remove("hidden");  // Tampilkan teks deskripsi
+            birthdayButton.style.display = "inline-block";  // Tampilkan tombol untuk tab ketiga
+        }
+
+        function openBirthdayPage() {
+            // Buka tab baru menuju ke ucapan_ulang_tahun.html
+            window.open("ucapan_ulang_tahun.html", "_blank");
         }
     </script>
 </body>
